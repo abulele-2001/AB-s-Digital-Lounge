@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB’s Digital Lounge | Print, Internet & Digital Services</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-pink-soft { background-color: #fff1f2; }
+        .bg-pink-brand { background-color: #db2777; }
+        .text-pink-brand { color: #db2777; }
+        .border-pink-brand { border-color: #f472b6; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased selection:bg-pink-500 selection:text-white">
+
+    <!-- Top Notification Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-4">
+            <span><i class="fa-solid fa-location-dot text-pink-500 mr-1.5"></i> Bluewater Bay, Gqeberha</span>
+            <span><i class="fa-solid fa-phone text-pink-500 mr-1.5"></i> 064 937 2480</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <span><i class="fa-regular fa-envelope text-pink-500 mr-1.5"></i> abulelemto1@gmail.com</span>
+            <button onclick="switchTab('admin')" class="bg-pink-600 hover:bg-pink-700 text-white px-2.5 py-1 rounded text-[11px] font-semibold transition">Staff Admin</button>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-xl bg-pink-100 border border-pink-300 flex items-center justify-center text-pink-600 font-bold text-lg shadow-inner">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-slate-900">AB’s Digital Lounge</span>
+                    <span class="block text-[11px] text-pink-600 font-medium tracking-wide uppercase">Print & Internet Café</span>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="switchTab('home')" id="nav-home" class="px-4 py-2 rounded-lg text-sm font-medium transition text-pink-600 bg-pink-50">Home</button>
+                <button onclick="switchTab('services')" id="nav-services" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">Our Services</button>
+                <button onclick="switchTab('order')" id="nav-order" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">Place an Order</button>
+                <button onclick="switchTab('book')" id="nav-book" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">Book a Service</button>
+                <button onclick="switchTab('track')" id="nav-track" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">Track My Order</button>
+                <button onclick="switchTab('contact')" id="nav-contact" class="px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900">Contact Us</button>
+            </nav>
+
+            <div>
+                <button onclick="switchTab('order')" class="bg-pink-600 hover:bg-pink-500 text-white font-medium px-4 py-2.5 rounded-xl text-sm transition shadow-md shadow-pink-600/20 flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Document
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Bar -->
+    <div class="md:hidden flex bg-white border-b border-slate-200 overflow-x-auto p-2 gap-1 text-xs">
+        <button onclick="switchTab('home')" id="mob-nav-home" class="px-3 py-2 font-medium text-pink-600 bg-pink-50 rounded-lg whitespace-nowrap">Home</button>
+        <button onclick="switchTab('services')" id="mob-nav-services" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Services</button>
+        <button onclick="switchTab('order')" id="mob-nav-order" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Place Order</button>
+        <button onclick="switchTab('book')" id="mob-nav-book" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Book</button>
+        <button onclick="switchTab('track')" id="mob-nav-track" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Track</button>
+        <button onclick="switchTab('admin')" id="mob-nav-admin" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Admin</button>
+        <button onclick="switchTab('contact')" id="mob-nav-contact" class="px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap">Contact</button>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="page-home" class="space-y-12 py-4">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl bg-gradient-to-br from-pink-50 via-pink-100/50 to-white border border-pink-200/80 p-8 sm:p-12 overflow-hidden shadow-sm">
+                <div class="max-w-2xl space-y-6 relative z-10">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-pink-200/80 text-pink-800">
+                        <i class="fa-solid fa-sparkles"></i> Welcome to Bluewater Bay's Digital Hub
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+                        Fast Printing & Digital Services without the Wait.
+                    </h1>
+                    <p class="text-base text-slate-600 leading-relaxed">
+                        Upload your documents, choose your finishing options, and book internet or computer time online at <strong class="text-slate-900">AB’s Digital Lounge</strong>. Pick up when ready!
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('order')" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-pink-600/30 flex items-center gap-2">
+                            <i class="fa-solid fa-file-arrow-up"></i> Place Printing Order
+                        </button>
+                        <button onclick="switchTab('book')" class="bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-check text-pink-600"></i> Book Internet / PC
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute right-6 bottom-6 hidden lg:block opacity-15 text-pink-600 text-[180px] pointer-events-none">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+            </div>
+
+            <!-- Quick Service Highlights -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-pink-300 transition">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Document Printing</h3>
+                    <p class="text-sm text-slate-600">Black & white or high-resolution colour printing for PDF, Word and spreadsheets.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-pink-300 transition">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Finishing & Binding</h3>
+                    <p class="text-sm text-slate-600">Professional stapling, spiral binding and protective document laminating.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-pink-300 transition">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Internet Café Access</h3>
+                    <p class="text-sm text-slate-600">High-speed browsing workstations, typing services, scanning and research.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-pink-300 transition">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Live Order Tracking</h3>
+                    <p class="text-sm text-slate-600">Track your order from pending to processing and ready for collection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: OUR SERVICES ================= -->
+        <section id="page-services" class="hidden space-y-8 py-4">
+            <div class="max-w-3xl">
+                <h2 class="text-2xl font-bold text-slate-900">Our Services & Pricing</h2>
+                <p class="text-sm text-slate-600 mt-1">Professional document solutions, internet workstations, and finishing services in Bluewater Bay, Gqeberha.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-pink-600 text-2xl mb-3"><i class="fa-solid fa-print"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Document Printing</h3>
+                        <p class="text-sm text-slate-600 mb-4">High-speed laser printing for assignments, CVs, invoices and reports.</p>
+                        <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Black & White (Single/Double)</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Full Colour Laser Prints</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> PDF, Word, Excel supported</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('order')" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold py-2.5 rounded-xl text-xs transition">Order Print</button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-pink-600 text-2xl mb-3"><i class="fa-solid fa-copy"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Photocopying & Scanning</h3>
+                        <p class="text-sm text-slate-600 mb-4">Quick multi-page copying and digital scanning to email or USB.</p>
+                        <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> A4 & A3 Copying</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> High-res Document Scanning</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Instant Email Delivery</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('services')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition">Available In-Store</button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-pink-600 text-2xl mb-3"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Finishing & Binding</h3>
+                        <p class="text-sm text-slate-600 mb-4">Protect and present your thesis, manuals and documents professionally.</p>
+                        <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Spiral & Comb Binding</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Document Laminating (ID to A3)</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Heavy Duty Stapling</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('order')" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold py-2.5 rounded-xl text-xs transition">Select Options</button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-pink-600 text-2xl mb-3"><i class="fa-solid fa-desktop"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Internet Café Workstations</h3>
+                        <p class="text-sm text-slate-600 mb-4">Fast computers equipped with internet access for research and applications.</p>
+                        <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> High-Speed Fibre Internet</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Microsoft Office & Adobe Reader</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Quiet Browsing Environment</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('book')" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold py-2.5 rounded-xl text-xs transition">Book Computer</button>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-pink-600 text-2xl mb-3"><i class="fa-solid fa-keyboard"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Typing & Secretarial</h3>
+                        <p class="text-sm text-slate-600 mb-4">Professional assistance with CV typing, cover letters, and forms.</p>
+                        <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> CV Redesign & Typing</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> SARS & Government Portals</li>
+                            <li><i class="fa-solid fa-check text-pink-600 mr-2"></i> Form Filling Assistance</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchTab('book')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition">Book Service</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: PLACE AN ORDER ================= -->
+        <section id="page-order" class="hidden space-y-8 py-4">
+            <div class="max-w-2xl">
+                <h2 class="text-2xl font-bold text-slate-900">Place a Printing Order</h2>
+                <p class="text-sm text-slate-600 mt-1">Upload your documents, choose your printing specifications and finishing requirements. We will prepare your order for quick collection.</p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs max-w-3xl">
+                <form id="print-order-form" onsubmit="handleOrderSubmission(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Full Name</label>
+                            <input type="text" id="order-name" required placeholder="e.g. Siyabonga Mthethwa" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Phone Number</label>
+                            <input type="tel" id="order-phone" required placeholder="e.g. 082 123 4567" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Upload Document (PDF, Word, Images)</label>
+                        <div class="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-pink-500 transition cursor-pointer bg-slate-50" onclick="document.getElementById('file-upload').click()">
+                            <div class="text-pink-600 text-3xl mb-2"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                            <p id="file-name-display" class="text-sm font-medium text-slate-700">Click to upload document or drag & drop</p>
+                            <p class="text-xs text-slate-500 mt-1">Supports PDF, DOCX, XLSX, PNG, JPG</p>
+                            <input type="file" id="file-upload" required class="hidden" onchange="updateFileName(this)">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Color Mode</label>
+                            <select id="order-color" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                                <option value="Black & White">Black & White</option>
+                                <option value="Full Colour">Full Colour</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Sides</label>
+                            <select id="order-sides" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                                <option value="Single-sided">Single-sided</option>
+                                <option value="Double-sided">Double-sided</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Copies</label>
+                            <input type="number" id="order-copies" min="1" value="1" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Document Finishing Options</label>
+                        <select id="order-finishing" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                            <option value="None">None (Loose Pages)</option>
+                            <option value="Stapled">Stapled</option>
+                            <option value="Spiral Binding">Spiral Binding</option>
+                            <option value="Laminated">Laminated</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Additional Instructions / Notes</label>
+                        <textarea id="order-notes" rows="2" placeholder="e.g. Please print pages 1 to 5 only..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3.5 rounded-xl transition shadow-lg shadow-pink-600/30 flex items-center justify-center gap-2">
+                        <span>Submit Printing Order</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: BOOK A SERVICE ================= -->
+        <section id="page-book" class="hidden space-y-8 py-4">
+            <div class="max-w-2xl">
+                <h2 class="text-2xl font-bold text-slate-900">Book Internet Café or Service</h2>
+                <p class="text-sm text-slate-600 mt-1">Reserve a computer workstation, scanning slot, or secretarial assistance time in advance.</p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs max-w-3xl">
+                <form id="booking-form" onsubmit="handleBookingSubmission(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Full Name</label>
+                            <input type="text" id="book-name" required placeholder="e.g. Zola Dlamini" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Phone Number</label>
+                            <input type="tel" id="book-phone" required placeholder="e.g. 073 987 6543" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Select Service</label>
+                            <select id="book-service-type" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                                <option value="Internet / PC Workstation">Internet / PC Workstation</option>
+                                <option value="Document Scanning Slot">Document Scanning Slot</option>
+                                <option value="Typing / CV Assistance">Typing / CV Assistance</option>
+                                <option value="SARS / Online Application">SARS / Government Application</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Collection / Booking Date</label>
+                            <input type="date" id="book-date" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Preferred Time Slot</label>
+                        <select id="book-time" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                            <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+                            <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                            <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                            <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM</option>
+                            <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+                            <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+                            <option value="04:00 PM - 05:00 PM">04:00 PM - 05:00 PM</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3.5 rounded-xl transition shadow-lg shadow-pink-600/30 flex items-center justify-center gap-2">
+                        <span>Confirm Reservation</span>
+                        <i class="fa-solid fa-calendar-check text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: TRACK MY ORDER ================= -->
+        <section id="page-track" class="hidden space-y-8 py-4">
+            <div class="max-w-2xl">
+                <h2 class="text-2xl font-bold text-slate-900">Track My Order</h2>
+                <p class="text-sm text-slate-600 mt-1">Enter your order reference code or review your submitted printing and booking tickets below.</p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs max-w-3xl space-y-6">
+                <div class="flex gap-3">
+                    <input type="text" id="track-input" placeholder="e.g. ORD-9842" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-500">
+                    <button onclick="trackOrder()" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition">Search</button>
+                </div>
+
+                <div id="tracking-result-box" class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                    <h3 class="font-semibold text-slate-800 mb-3 text-sm">Recent Orders on This Device</h3>
+                    <div id="customer-orders-list" class="space-y-3">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6: ADMINISTRATOR DASHBOARD ================= -->
+        <section id="page-admin" class="hidden space-y-8 py-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-pink-100 text-pink-700 mb-1">Staff Management Portal</span>
+                    <h2 class="text-2xl font-bold text-slate-900">AB’s Digital Lounge Control Panel</h2>
+                </div>
+                <button onclick="switchTab('home')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-4 py-2 rounded-xl text-xs font-semibold transition">Exit to Website</button>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Orders</p>
+                    <h3 id="stat-total-orders" class="text-3xl font-bold text-slate-900 mt-2">12</h3>
+                    <span class="text-xs text-emerald-600 mt-1 inline-block"><i class="fa-solid fa-arrow-trend-up"></i> +4 today</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pending Processing</p>
+                    <h3 id="stat-pending-orders" class="text-3xl font-bold text-pink-600 mt-2">3</h3>
+                    <span class="text-xs text-slate-500 mt-1 inline-block">Requires printing</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Active Bookings</p>
+                    <h3 id="stat-active-bookings" class="text-3xl font-bold text-slate-900 mt-2">5</h3>
+                    <span class="text-xs text-slate-500 mt-1 inline-block">PC & Scanner slots</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Location</p>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">Bluewater Bay</h3>
+                    <span class="text-xs text-pink-600 mt-1 inline-block">Gqeberha</span>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-list text-pink-600"></i> Customer Print Orders
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase">
+                            <tr>
+                                <th class="pb-3">Ref & Name</th>
+                                <th class="pb-3">Document</th>
+                                <th class="pb-3">Specs</th>
+                                <th class="pb-3">Status</th>
+                                <th class="pb-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-body" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bookings Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-pink-600"></i> Service & Internet Workstation Bookings
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase">
+                            <tr>
+                                <th class="pb-3">Client Name</th>
+                                <th class="pb-3">Service</th>
+                                <th class="pb-3">Date & Time</th>
+                                <th class="pb-3">Phone</th>
+                                <th class="pb-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bookings-body" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 7: CONTACT US ================= -->
+        <section id="page-contact" class="hidden space-y-8 py-4">
+            <div class="max-w-2xl">
+                <h2 class="text-2xl font-bold text-slate-900">Contact AB’s Digital Lounge</h2>
+                <p class="text-sm text-slate-600 mt-1">Visit our shop in Bluewater Bay, Gqeberha, or get in touch via phone, email or WhatsApp.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Location</h3>
+                    <p class="text-sm text-slate-600">Bluewater Bay<br>Gqeberha, Eastern Cape</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Phone & WhatsApp</h3>
+                    <p class="text-sm text-slate-600">064 937 2480<br>Mon - Sat: 08:30 - 17:30</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Email Address</h3>
+                    <p class="text-sm text-slate-600">abulelemto1@gmail.com<br>Response within 2 hours</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-white border-t border-slate-200 py-6 px-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 AB’s Digital Lounge (Bluewater Bay, Gqeberha). All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // In-Memory State
+        let appData = {
+            orders: [
+                { id: 'ORD-1001', name: 'Siyabonga Mthethwa', phone: '082 123 4567', file: 'Assignment_Term3.pdf', specs: 'Black & White, Single, 12 pages, Stapled', status: 'Ready for Collection', date: 'Today, 09:15 AM' },
+                { id: 'ORD-1002', name: 'Nomusa Khumalo', phone: '073 456 7890', file: 'CV_Updated_2026.docx', specs: 'Full Colour, Single, 2 pages, Spiral Binding', status: 'Processing', date: 'Today, 10:30 AM' },
+                { id: 'ORD-1003', name: 'Cornelius van Wyk', phone: '081 987 6543', file: 'Tax_Forms_SARS.pdf', specs: 'Black & White, Double, 5 pages, None', status: 'Pending', date: 'Today, 11:05 AM' }
+            ],
+            bookings: [
+                { name: 'Zola Dlamini', service: 'Internet / PC Workstation', date: '2026-06-12', time: '10:00 AM - 11:00 AM', phone: '073 987 6543' },
+                { name: 'Hlokoma Nyathi', service: 'Document Scanning Slot', date: '2026-06-12', time: '11:00 AM - 12:00 PM', phone: '083 112 2334' }
+            ]
+        };
+
+        // Navigation Switcher
+        function switchTab(tabId) {
+            const pages = ['home', 'services', 'order', 'book', 'track', 'admin', 'contact'];
+            pages.forEach(p => {
+                const el = document.getElementById(`page-${p}`);
+                if (el) el.classList.add('hidden');
+                
+                const navBtn = document.getElementById(`nav-${p}`);
+                if (navBtn) navBtn.className = "px-4 py-2 rounded-lg text-sm font-medium transition text-slate-600 hover:text-slate-900";
+                
+                const mobBtn = document.getElementById(`mob-nav-${p}`);
+                if (mobBtn) mobBtn.className = "px-3 py-2 font-medium text-slate-600 rounded-lg whitespace-nowrap";
+            });
+
+            const target = document.getElementById(`page-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) activeNav.className = "px-4 py-2 rounded-lg text-sm font-medium transition text-pink-600 bg-pink-50";
+
+            const activeMob = document.getElementById(`mob-nav-${tabId}`);
+            if (activeMob) activeMob.className = "px-3 py-2 font-medium text-pink-600 bg-pink-50 rounded-lg whitespace-nowrap";
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (tabId === 'admin') renderAdmin();
+            if (tabId === 'track') renderCustomerOrders();
+        }
+
+        // File upload UI helper
+        function updateFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('file-name-display').textContent = "Selected: " + input.files[0].name;
+            }
+        }
+
+        // Handle Order Submission
+        function handleOrderSubmission(e) {
+            e.preventDefault();
+            const name = document.getElementById('order-name').value;
+            const phone = document.getElementById('order-phone').value;
+            const fileInput = document.getElementById('file-upload');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'Document.pdf';
+            const color = document.getElementById('order-color').value;
+            const sides = document.getElementById('order-sides').value;
+            const copies = document.getElementById('order-copies').value;
+            const finishing = document.getElementById('order-finishing').value;
+            
+            const newId = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+            const specs = `${color}, ${sides}, ${copies} copy(s), ${finishing}`;
+
+            appData.orders.unshift({
+                id: newId,
+                name: name,
+                phone: phone,
+                file: fileName,
+                specs: specs,
+                status: 'Pending',
+                date: 'Just now'
+            });
+
+            alert(`Order submitted successfully! Your tracking reference is ${newId}. We will prepare your prints at AB’s Digital Lounge in Bluewater Bay.`);
+            document.getElementById('print-order-form').reset();
+            document.getElementById('file-name-display').textContent = "Click to upload document or drag & drop";
+            switchTab('track');
+        }
+
+        // Handle Booking Submission
+        function handleBookingSubmission(e) {
+            e.preventDefault();
+            const name = document.getElementById('book-name').value;
+            const phone = document.getElementById('book-phone').value;
+            const service = document.getElementById('book-service-type').value;
+            const date = document.getElementById('book-date').value;
+            const time = document.getElementById('book-time').value;
+
+            appData.bookings.unshift({ name, service, date, time, phone });
+
+            alert(`Booking confirmed for ${service} on ${date} at ${time}. See you at AB’s Digital Lounge!`);
+            document.getElementById('booking-form').reset();
+            switchTab('home');
+        }
+
+        // Render Customer Tracking list
+        function renderCustomerOrders() {
+            const listEl = document.getElementById('customer-orders-list');
+            listEl.innerHTML = '';
+            appData.orders.forEach(o => {
+                let badgeClass = "bg-amber-50 text-amber-700 border-amber-200";
+                if (o.status === 'Ready for Collection') badgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+                if (o.status === 'Processing') badgeClass = "bg-indigo-50 text-indigo-700 border-indigo-200";
+
+                listEl.innerHTML += `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-white border border-slate-200 rounded-xl gap-2">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono font-bold text-pink-600 text-xs">${o.id}</span>
+                                <span class="text-xs text-slate-500">• ${o.file}</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mt-1">${o.specs}</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold border ${badgeClass}">${o.status}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // Track specific search
+        function trackOrder() {
+            const query = document.getElementById('track-input').value.trim().toUpperCase();
+            if (!query) {
+                renderCustomerOrders();
+                return;
+            }
+            const found = appData.orders.filter(o => o.id.includes(query) || o.name.toUpperCase().includes(query));
+            const listEl = document.getElementById('customer-orders-list');
+            listEl.innerHTML = '';
+            if (found.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-slate-500">No orders found matching "${query}".</p>`;
+                return;
+            }
+            found.forEach(o => {
+                listEl.innerHTML += `
+                    <div class="flex justify-between items-center p-4 bg-white border border-slate-200 rounded-xl">
+                        <div>
+                            <span class="font-mono font-bold text-pink-600 text-xs">${o.id}</span> - <span class="font-medium text-slate-900">${o.name}</span>
+                            <p class="text-xs text-slate-500">${o.file} (${o.specs})</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-pink-50 text-pink-700 border border-pink-200">${o.status}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Admin Dashboard
+        function renderAdmin() {
+            document.getElementById('stat-total-orders').textContent = appData.orders.length;
+            document.getElementById('stat-pending-orders').textContent = appData.orders.filter(o => o.status === 'Pending').length;
+            document.getElementById('stat-active-bookings').textContent = appData.bookings.length;
+
+            const ordersBody = document.getElementById('admin-orders-body');
+            ordersBody.innerHTML = '';
+            appData.orders.forEach((o, idx) => {
+                ordersBody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 font-medium text-slate-900">
+                            <span class="font-mono text-xs text-pink-600 block">${o.id}</span>
+                            ${o.name} <span class="text-xs text-slate-400">(${o.phone})</span>
+                        </td>
+                        <td class="py-3 text-slate-600 font-mono text-xs">${o.file}</td>
+                        <td class="py-3 text-xs text-slate-600">${o.specs}</td>
+                        <td class="py-3">
+                            <select onchange="updateOrderStatus(${idx}, this.value)" class="text-xs bg-slate-100 border border-slate-300 rounded-lg px-2.5 py-1 font-medium">
+                                <option value="Pending" ${o.status==='Pending'?'selected':''}>Pending</option>
+                                <option value="Processing" ${o.status==='Processing'?'selected':''}>Processing</option>
+                                <option value="Ready for Collection" ${o.status==='Ready for Collection'?'selected':''}>Ready</option>
+                            </select>
+                        </td>
+                        <td class="py-3 text-right">
+                            <button onclick="deleteOrder(${idx})" class="text-slate-400 hover:text-rose-600 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            const bookingsBody = document.getElementById('admin-bookings-body');
+            bookingsBody.innerHTML = '';
+            appData.bookings.forEach((b, idx) => {
+                bookingsBody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 font-medium text-slate-900">${b.name}</td>
+                        <td class="py-3 text-pink-600 font-medium">${b.service}</td>
+                        <td class="py-3 text-xs text-slate-600">${b.date} (${b.time})</td>
+                        <td class="py-3 text-xs text-slate-600 font-mono">${b.phone}</td>
+                        <td class="py-3 text-right">
+                            <button onclick="deleteBooking(${idx})" class="text-slate-400 hover:text-rose-600 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateOrderStatus(idx, status) {
+            appData.orders[idx].status = status;
+            renderAdmin();
+        }
+
+        function deleteOrder(idx) {
+            if (confirm('Delete this print order record?')) {
+                appData.orders.splice(idx, 1);
+                renderAdmin();
+            }
+        }
+
+        function deleteBooking(idx) {
+            if (confirm('Delete this booking record?')) {
+                appData.bookings.splice(idx, 1);
+                renderAdmin();
+            }
+        }
+    </script>
+</body>
+</html>
